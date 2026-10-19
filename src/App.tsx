@@ -1,80 +1,90 @@
 import React, { useState } from 'react';
+import './kyro-reference.css';
 
-const creators = ['VERMAX', 'DefinitelyDead', 'TechSource', 'More Techy', '100 DAYS', 'TECH REVIEWS'];
-const projects = [
-  { name: 'Vermax', type: 'Tech · Long-form', title: 'Making every frame feel premium.', views: '1M+ views', image: 'https://img.youtube.com/vi/U_awTGaTQV0/maxresdefault.jpg', color: 'blue' },
-  { name: 'DefinitelyDead', type: 'Minecraft · 100 Days', title: 'Turning hours of gameplay into a story.', views: '322K views', image: 'https://img.youtube.com/vi/w0di3CNI8-w/maxresdefault.jpg', color: 'violet' },
+const calendly = 'https://calendly.com/rgsfirdaus/30min';
+const techThumbs = [
+  'https://img.youtube.com/vi/U_awTGaTQV0/maxresdefault.jpg',
+  'https://img.youtube.com/vi/8x7m4q6Y2oA/maxresdefault.jpg',
+  'https://img.youtube.com/vi/3s3l9Q7j9gE/maxresdefault.jpg',
+  'https://img.youtube.com/vi/4c1r7o2V5wA/maxresdefault.jpg',
+];
+const minecraftThumbs = [
+  'https://img.youtube.com/vi/w0di3CNI8-w/maxresdefault.jpg',
+  'https://img.youtube.com/vi/6bB9Q4s0P7Y/maxresdefault.jpg',
+  'https://img.youtube.com/vi/2Vv-BfVoq4g/maxresdefault.jpg',
+  'https://img.youtube.com/vi/0e3GPea1Tyg/maxresdefault.jpg',
 ];
 const faqs = [
-  ['What kind of channels do you work with?', 'We focus on tech creators and Minecraft channels, including tech reviews, gaming stories, and 100 Days videos.'],
-  ['Can you handle long-form videos and shorts?', 'Yes. We can support long-form edits, short-form cutdowns, and a consistent visual style across your channel.'],
-  ['How does the process work?', 'We align on your format and references, edit the first cut, then refine pacing, sound design, and visuals with your feedback.'],
-  ['How do I get started?', 'Book a short discovery call. We’ll learn about your channel, upload schedule, and the kind of editing support you need.'],
+  ['Do you edit both long form and shorts?', 'Yes. Long-form videos, shorts, recuts and sponsor segments can all be handled by one editing partner so every format feels consistent.'],
+  ["What's the typical turnaround?", 'Turnaround depends on the length and complexity of the video. We agree on a realistic schedule before each project starts.'],
+  ['Can you match my existing style?', 'Absolutely. We study your references, pacing, graphics and audience expectations before shaping the edit around your channel.'],
+  ['Do you do motion graphics?', 'Yes. We can add clean motion graphics, callouts, product details, captions and visual explanations when they improve the story.'],
+  ['How does pricing work?', 'Pricing depends on the format, video length, complexity and delivery cadence. Book a call and we can scope the right setup for your channel.'],
 ];
 
-function Arrow({ light = false }: { light?: boolean }) {
-  return <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+function Arrow({ down = false }: { down?: boolean }) {
+  return <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d={down ? 'm3.5 6 4.5 4.5L12.5 6' : 'M3 8h10M8.5 3.5 13 8l-4.5 4.5'} stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
-
-function LaptopScene() {
-  return <div className="laptop-scene" aria-label="Illustration of a video editing workstation">
-    <div className="scene-glow" />
-    <div className="floating-chip chip-one"><span className="chip-dot" /> TIMELINE · 04:28</div>
-    <div className="floating-chip chip-two"><span className="equalizer"><i/><i/><i/><i/><i/></span> SOUND DESIGN</div>
-    <div className="laptop">
-      <div className="laptop-screen">
-        <div className="screen-top"><span className="window-dots"><i/><i/><i/></span><span>KYRO / EDIT SUITE</span><span>4K · 24 FPS</span></div>
-        <div className="screen-content">
-          <div className="preview-frame"><div className="preview-sun"/><div className="preview-mountain m1"/><div className="preview-mountain m2"/><div className="preview-play">▶</div><span className="preview-label">SEQUENCE_04</span></div>
-          <div className="side-panel"><span>PROJECT</span><i/><i/><i/><i/><i/></div>
-        </div>
-        <div className="timeline-label"><span>00:00</span><span>00:15</span><span>00:30</span><span>00:45</span></div>
-        <div className="timeline"><div className="track track-a"><i/><i/><i/></div><div className="track track-b"><i/><i/></div><div className="track track-c"><i/><i/><i/><i/></div><div className="playhead"/></div>
-      </div>
-      <div className="laptop-base"><div className="trackpad"/></div>
-    </div>
-    <div className="film-strip strip-a"><i/><i/><i/><i/></div><div className="film-strip strip-b"><i/><i/><i/></div>
-    <div className="app-icon premiere">Pr</div><div className="app-icon after">Ae</div>
-    <div className="scene-caption"><span className="caption-line"/> BUILT AROUND YOUR CHANNEL <span className="caption-line"/></div>
+function Brand() {
+  return <a href="#top" className="km-brand" aria-label="Kyro Media home"><span className="km-brand-mark">K</span><span><strong>KYRO</strong> MEDIA</span></a>;
+}
+function VideoMeta({ minecraft = false }: { minecraft?: boolean }) {
+  return <div className="km-video-meta">
+    <div className="km-meta-owner"><span className="km-avatar">{minecraft ? 'P' : 'V'}</span><div><strong>{minecraft ? 'PSD1 × Kyro' : 'Vermax × Kyro'}</strong><small>{minecraft ? 'I Survived 100 Days in the BACKROOMS' : 'S500 Gaming PC Build (Full Guide)'}</small></div></div>
+    <a className="km-youtube-link" href="https://www.youtube.com/" target="_blank" rel="noreferrer">YouTube ↗</a>
+    <div className="km-meta-stats"><span><small>Views</small><b>{minecraft ? '1.1M' : '263K'}</b></span><span><small>Length</small><b>{minecraft ? '1:08:24' : '37:14'}</b></span><span><small>Likes</small><b>{minecraft ? '52K' : '4.3K'}</b></span><span><small>Comments</small><b>{minecraft ? '3.1K' : '541'}</b></span></div>
   </div>;
 }
-
+function WorkShowcase({ minecraft = false }: { minecraft?: boolean }) {
+  const [active, setActive] = useState(0);
+  const images = minecraft ? minecraftThumbs : techThumbs;
+  return <div className={'km-showcase '+(minecraft ? 'km-showcase-mc' : 'km-showcase-tech')}>
+    <div className="km-showcase-tabs">{(minecraft ? ['100 Days', 'Recut', 'Shorts'] : ['Long form', 'Shorts', 'Sponsor segments']).map((tab, i) => <button key={tab} className={active === i ? 'active' : ''} onClick={() => setActive(i)}>{tab}</button>)}</div>
+    <div className="km-gallery">
+      <img className="km-gallery-side km-gallery-left" src={images[(active + 1) % images.length]} alt="" loading="lazy" />
+      <img className="km-gallery-side km-gallery-left2" src={images[(active + 2) % images.length]} alt="" loading="lazy" />
+      <div className="km-feature-video"><img src={images[active]} alt={minecraft ? 'Minecraft editing project' : 'Tech editing project'} loading="lazy"/><a href="https://www.youtube.com/" target="_blank" rel="noreferrer" className="km-play" aria-label="Watch featured video">▶</a></div>
+      <img className="km-gallery-side km-gallery-right" src={images[(active + 3) % images.length]} alt="" loading="lazy" />
+      <img className="km-gallery-side km-gallery-right2" src={images[(active + 2) % images.length]} alt="" loading="lazy" />
+    </div>
+    <VideoMeta minecraft={minecraft}/>
+  </div>;
+}
+function WorkSection({ minecraft = false }: { minecraft?: boolean }) {
+  return <section className={'km-work-card '+(minecraft ? 'km-work-mc' : 'km-work-tech')} id={minecraft ? 'minecraft' : 'tech'}>
+    <div className="km-work-copy"><div className="km-eyebrow"><span/> FEATURED WORK</div>
+      <h2>{minecraft ? 'Minecraft 100 Days' : 'Tech'}</h2>
+      <p>{minecraft ? 'Full episodes, recuts and shorts, all from one recording.' : 'Long form, shorts and sponsor segments, edited by one team so every video hits harder.'}</p>
+      <div className="km-tags">{(minecraft ? ['100 Days', 'Recut', 'Shorts', 'Story editing', 'Motion graphics'] : ['Long form', 'Shorts', 'Sponsor segments', 'Motion graphics', 'Ads']).map((tag, i)=><span key={tag} className={i === 0 ? 'selected' : ''}>{tag}</span>)}</div>
+      <div className="km-proof"><div className="km-proof-avatars"><img src="/creator-kwil.jpg" alt="Creator"/><img src="/creator-mia.jpg" alt="Creator"/><img src="/creator-miloblox.jpg" alt="Creator"/><img src="/creator-rageelixir.jpg" alt="Creator"/></div><span>Worked with creators in <b>{minecraft ? 'Minecraft' : 'tech and gaming'}</b></span></div>
+      <a className="km-button km-button-blue" href="#case-studies">View work <Arrow/></a>
+    </div>
+    <WorkShowcase minecraft={minecraft}/>
+  </section>;
+}
+function CaseVideo({ minecraft = false }: { minecraft?: boolean }) {
+  const img = minecraft ? minecraftThumbs[0] : techThumbs[0];
+  return <div className={'km-case-video '+(minecraft ? 'mc' : 'tech')}>
+    <div className="km-case-video-top"><span><i/> Edited by me for this creator</span><a href="https://www.youtube.com/" target="_blank" rel="noreferrer">View on YouTube ↗</a></div>
+    <a className="km-case-image" href="https://www.youtube.com/" target="_blank" rel="noreferrer"><img src={img} alt={minecraft ? 'Minecraft 100 Days video' : 'Tech gaming PC video'}/><span className="km-play">▶</span></a>
+    <div className="km-case-caption"><strong>{minecraft ? 'I Spent 100 Days in the NEW CRAZY CRAFT…' : 'AMD vs Intel Gaming PC!'}</strong><span>{minecraft ? '322K views · 3:58:49' : '184K views · 39:56'}</span></div>
+  </div>;
+}
 export default function App() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  return <div className="kyro-site">
-    <div className="announcement"><span className="announcement-dot"/> EDITING PARTNER FOR TECH & MINECRAFT CREATORS <span className="announcement-arrow">↗</span></div>
-    <header className="nav-wrap"><nav className="nav-bar">
-      <a className="brand" href="#top" aria-label="Kyro Media home"><span className="brand-mark"><i/><i/><i/></span><span>kyro<span className="brand-light">media</span><small>CREATOR EDITING STUDIO</small></span></a>
-      <div className="nav-links"><a href="#work">Work</a><a href="#case-studies">Case studies</a><a href="#contact">Contact</a></div>
-      <a className="btn btn-primary nav-cta" href="https://calendly.com/rgsfirdaus/30min" target="_blank" rel="noreferrer">Book a call <Arrow/></a>
-      <a className="mobile-cta" href="https://calendly.com/rgsfirdaus/30min" target="_blank" rel="noreferrer">Book a call <Arrow/></a>
-    </nav></header>
-    <main id="top">
-      <section className="hero section-shell">
-        <div className="hero-copy">
-          <div className="eyebrow"><span className="eyebrow-icon">✳</span> YOUR CREATOR EDITING TEAM</div>
-          <h1>Editor behind<br/><span>Tech and Minecraft</span><br/>channels.</h1>
-          <p className="hero-description">You bring the vision. We turn the footage into videos people stay for — with sharp pacing, thoughtful sound design, and a style built around your channel.</p>
-          <div className="hero-actions"><a className="btn btn-primary" href="https://calendly.com/rgsfirdaus/30min" target="_blank" rel="noreferrer">Book a call <Arrow/></a><a className="btn btn-secondary" href="#work">See the work <Arrow/></a></div>
-          <div className="hero-proof"><div className="proof-avatars"><span>V</span><span>D</span><span>T</span><span>+</span></div><div><strong>Built for creators who care about quality.</strong><small>Long-form stories · Tech reviews · Shorts</small></div></div>
-        </div>
-        <LaptopScene/>
-        <div className="hero-bottom"><span>STRATEGY → STORY → FINAL CUT</span><span className="scroll-cue">SCROLL TO EXPLORE <span>↓</span></span></div>
+  return <div className="km-site" id="top">
+    <header className="km-nav-wrap"><nav className="km-nav"><Brand/><div className="km-nav-links"><a href="#work">Work <span>⌄</span></a><a href="#case-studies">Case studies</a><a href="#contact">Contact</a></div><a className="km-button km-button-blue km-nav-cta" href={calendly} target="_blank" rel="noreferrer">Book a call <Arrow/></a><a className="km-mobile-cta" href={calendly} target="_blank" rel="noreferrer">Book a call</a></nav></header>
+    <main>
+      <section className="km-hero">
+        <div className="km-hero-copy"><h1>Editor Behind<br/><span>Tech and Minecraft</span><br/>Channels</h1><p>Editing built around your channel, your audience, and the moments that make people keep watching.</p><div className="km-hero-actions"><a className="km-button km-button-blue" href={calendly} target="_blank" rel="noreferrer">Book a call <Arrow/></a><a className="km-button km-button-white" href="#work">See the work <Arrow/></a></div></div>
+        <div className="km-hero-art" aria-label="Video editing workstation illustration"><div className="km-hero-halo"/><div className="km-film km-film-a"><img src={techThumbs[0]} alt=""/><img src={minecraftThumbs[1]} alt=""/><img src={techThumbs[2]} alt=""/></div><div className="km-film km-film-b"><img src={minecraftThumbs[0]} alt=""/><img src={minecraftThumbs[2]} alt=""/><img src={techThumbs[3]} alt=""/></div><div className="km-hero-laptop"><div className="km-laptop-screen"><div className="km-screen-bar"><i/><i/><i/><span>KYRO MEDIA · EDIT SUITE</span></div><img src={techThumbs[0]} alt="Video editing preview"/><div className="km-laptop-timeline"><i/><i/><i/><i/><i/><i/></div></div><div className="km-laptop-base"/></div><div className="km-app-icon km-pr">Pr</div><div className="km-app-icon km-ae">Ae</div><div className="km-sound-chip">▥ <span>Audio waveform</span></div><div className="km-play-chip">▶</div></div>
       </section>
-      <section className="creator-band"><div className="creator-intro">A CREATIVE PARTNER FOR THE CHANNELS YOU WATCH</div><div className="creator-marquee"><div className="creator-track">{[...creators,...creators].map((c,i)=><span className="creator-name" key={c+i}>{c}<b>✳</b></span>)}</div></div></section>
-      <section className="formats section-shell" id="work">
-        <div className="section-heading"><div><div className="eyebrow blue-eyebrow">WHAT WE DO</div><h2>Two formats. One team<br/>that knows both.</h2></div><p>Different audiences. Different rhythms.<br/>One consistent standard for every upload.</p></div>
-        <div className="format-grid">
-          <article className="format-card tech-card"><div className="format-top"><span className="format-number">01 / TECH</span><span className="round-arrow"><Arrow/></span></div><div className="format-art tech-art"><div className="tech-orb orb-a"/><div className="tech-orb orb-b"/><div className="phone-device"><div className="phone-screen"><div className="phone-camera"/><div className="phone-glow"/><div className="phone-lines"><i/><i/><i/></div></div></div><div className="floating-spec spec-a">4K / 60</div><div className="floating-spec spec-b">DETAIL MATTERS</div></div><div className="format-copy"><h3>Tech reviews</h3><p>Clean storytelling, crisp product visuals, and motion graphics that make every detail feel intentional.</p><div className="tag-row"><span>Product storytelling</span><span>Motion graphics</span><span>Sound design</span></div><a href="#case-studies" className="text-link">Explore tech editing <Arrow/></a></div></article>
-          <article className="format-card minecraft-card"><div className="format-top"><span className="format-number">02 / MINECRAFT</span><span className="round-arrow"><Arrow/></span></div><div className="format-art minecraft-art"><div className="pixel-sun"/><div className="pixel-cloud cloud-a"/><div className="pixel-cloud cloud-b"/><div className="pixel-hill hill-a"/><div className="pixel-hill hill-b"/><div className="pixel-block block-a"/><div className="pixel-block block-b"/><div className="day-counter">DAY <b>100</b></div><div className="minecraft-tag">THE JOURNEY MATTERS</div></div><div className="format-copy"><h3>Minecraft stories</h3><p>Hours of gameplay shaped into a cinematic story — from first-day chaos to the final boss fight.</p><div className="tag-row"><span>100 Days</span><span>Story pacing</span><span>Gameplay</span></div><a href="#case-studies" className="text-link">Explore Minecraft editing <Arrow/></a></div></article>
-        </div>
-      </section>
-      <section className="stats-band"><div className="stats-inner"><div className="stats-title"><span className="eyebrow">THE WORK SPEAKS</span><h2>Made to keep<br/>people watching.</h2></div><div className="stat"><strong>250<span>M+</span></strong><small>Creator views supported</small></div><div className="stat"><strong>2<span>+</span></strong><small>Specialized editing formats</small></div><div className="stat"><strong>1<span>team</span></strong><small>One reliable creative partner</small></div></div></section>
-      <section className="case-section section-shell" id="case-studies"><div className="section-heading"><div><div className="eyebrow blue-eyebrow">SELECTED WORK</div><h2>Good videos are felt.<br/>Great ones are remembered.</h2></div><p>We build every edit around the creator, the audience, and the moment the story needs.</p></div><div className="case-grid">{projects.map((p,i)=><article className={'case-card '+p.color} key={p.name}><a href={i===0?'https://www.youtube.com/results?search_query=Vermax+tech+videos':'https://www.youtube.com/results?search_query=DefinitelyDead+Minecraft'} target="_blank" rel="noreferrer" className="case-image"><img src={p.image} alt={p.name+' video thumbnail'} loading="lazy"/><span className="image-overlay"/><span className="play-button">▶</span><span className="case-views">{p.views}</span></a><div className="case-info"><div className="case-type">{p.type}</div><h3>{p.title}</h3><div className="case-bottom"><span>{p.name}</span><a href={i===0?'https://www.youtube.com/results?search_query=Vermax+tech+videos':'https://www.youtube.com/results?search_query=DefinitelyDead+Minecraft'} target="_blank" rel="noreferrer" aria-label={'View '+p.name+' work'}><Arrow/></a></div></div></article>)}</div><div className="work-note"><span className="note-star">✳</span><p>Every channel has its own rhythm. We find it, then make it unmistakable.</p><a className="text-link" href="#contact">Let's talk about your channel <Arrow/></a></div></section>
-      <section className="process-section"><div className="section-shell"><div className="section-heading"><div><div className="eyebrow blue-eyebrow">A SIMPLE PROCESS</div><h2>Less back-and-forth.<br/>More great videos.</h2></div><p>A clear workflow that lets you focus on creating while we focus on the edit.</p></div><div className="process-grid"><div className="process-step"><span>01</span><div className="step-icon">↗</div><h3>Align</h3><p>We learn your style, audience, upload cadence, and what a successful video looks like.</p></div><div className="process-step"><span>02</span><div className="step-icon">⌁</div><h3>Shape the story</h3><p>We build the edit around pacing, clarity, sound, and the moments that matter.</p></div><div className="process-step"><span>03</span><div className="step-icon">✳</div><h3>Refine & deliver</h3><p>We take your feedback, polish the details, and deliver a final cut ready to publish.</p></div></div></div></section>
-      <section className="faq-section section-shell"><div className="faq-heading"><div className="eyebrow blue-eyebrow">GOOD QUESTIONS</div><h2>Before we hit<br/>the timeline.</h2><p>Everything you need to know to get started.</p><a className="text-link" href="https://calendly.com/rgsfirdaus/30min" target="_blank" rel="noreferrer">Ask us on a call <Arrow/></a></div><div className="faq-list">{faqs.map(([q,a],i)=><article className={'faq-item '+(openFaq===i?'faq-open':'')} key={q}><button onClick={()=>setOpenFaq(openFaq===i?null:i)} aria-expanded={openFaq===i}><span className="faq-index">0{i+1}</span><span>{q}</span><span className="faq-toggle">{openFaq===i?'−':'+'}</span></button>{openFaq===i&&<p>{a}</p>}</article>)}</div></section>
-      <section className="contact-section section-shell" id="contact"><div className="contact-card"><div className="contact-glow"/><div className="eyebrow">YOUR NEXT VIDEO STARTS HERE</div><h2>Let’s make something<br/><span>worth watching.</span></h2><p>Tell us what you're building. We'll figure out the best way to help.</p><div className="contact-actions"><a className="btn btn-white" href="https://calendly.com/rgsfirdaus/30min" target="_blank" rel="noreferrer">Book a call <Arrow/></a><a className="btn btn-glass" href="https://x.com/RiddlePlayZz" target="_blank" rel="noreferrer">Contact the team <Arrow/></a></div><div className="contact-orbit orbit-one"/><div className="contact-orbit orbit-two"/></div></section>
+      <section className="km-work-section" id="work"><WorkSection/><WorkSection minecraft/></section>
+      <section className="km-stats"><div className="km-stats-backdrop">{[...techThumbs,...minecraftThumbs,...minecraftThumbs].map((img,i)=><img key={i} src={img} alt="" loading="lazy"/>)}</div><div className="km-stats-panel"><div><strong>250M<span>+</span></strong><p>Views on the videos<br/>edited by Kyro</p></div><div><strong>50<span>+</span></strong><p>Creators worked with<br/>in tech and Minecraft</p></div><div><strong>8<span>×</span></strong><p>Average views on clients<br/>after switching to Kyro</p></div></div></section>
+      <section className="km-case-section" id="case-studies"><div className="km-case-heading"><span>CASE STUDIES</span><h2>Real Creators. Real <b>Results.</b></h2><p>A closer look at how I help creators grow with focused editing, better storytelling,<br className="km-desktop-only"/> and content that actually performs.</p></div><div className="km-case-row"><div className="km-case-copy"><div className="km-case-label">● TECH CASE STUDY</div><h3>How we helped this tech creator <b>8x his average views</b> with one editor instead of two?</h3><p>He had one editor for long form and another for shorts, with every note going through him. We took over both, improved pacing, added better storytelling and sponsor segments. His average views went from around 25K to 200K+.</p><div className="km-result-strip"><span><small>Subscribers</small><b>734K → <i>973K</i></b></span><span><small>Avg views</small><b>~25K → <i>200K+</i></b></span><span><small>Shorts delivered</small><b><i>100+</i></b></span></div></div><CaseVideo/></div><div className="km-case-row km-case-row-reverse"><CaseVideo minecraft/><div className="km-case-copy"><div className="km-case-label">● MINECRAFT CASE STUDY</div><h3>How we helped <b>10x this creator's distribution</b> with the same amount of his time?</h3><p>He records one 100 Days episode a week. We turn that one recording into the main video, a tighter recut and multiple short clips. Three channels, and not an extra hour of his time.</p><div className="km-result-strip"><span><small>Subscribers</small><b>~15K → <i>24K+</i></b></span><span><small>Views a month</small><b><i>1M+</i></b></span><span><small>Channels</small><b>1 → <i>3</i></b></span></div></div></div><div className="km-case-bottom"><a className="km-button km-button-blue" href="https://www.youtube.com/" target="_blank" rel="noreferrer">View all case studies <Arrow/></a></div></section>
+      <section className="km-faq-section"><div className="km-faq-inner"><div className="km-faq-intro"><div className="km-case-label">● FAQS</div><h2>FAQs</h2><p>Pick your niche. If your question isn’t here, ask us on a call.</p><div className="km-niche-card"><div className="km-niche-avatars"><img src="/creator-kwil.jpg" alt=""/><img src="/creator-mia.jpg" alt=""/><img src="/creator-miloblox.jpg" alt=""/></div><div><b>Tech</b><small>Long form, shorts, sponsor segments</small></div><strong>5</strong></div><div className="km-niche-card"><div className="km-niche-avatars"><img src="/creator-rageelixir.jpg" alt=""/><img src="/creator-sharktactics.jpg" alt=""/><img src="/creator-doodlearkeyplays.jpg" alt=""/></div><div><b>Minecraft</b><small>100 Days, recuts, shorts</small></div><strong>5</strong></div><a className="km-button km-button-outline" href={calendly} target="_blank" rel="noreferrer">Book a call <Arrow/></a></div><div className="km-faq-list">{faqs.map(([q,a],i)=><article className={'km-faq-item '+(openFaq===i?'open':'')} key={q}><button onClick={()=>setOpenFaq(openFaq===i?null:i)} aria-expanded={openFaq===i}><span className="km-faq-num">0{i+1}</span><strong>{q}</strong><span className="km-faq-toggle"><Arrow down={openFaq!==i}/></span></button>{openFaq===i&&<p>{a}</p>}</article>)}</div></div></section>
+      <section className="km-contact-section" id="contact"><div className="km-contact-orbit km-orbit-a"/><div className="km-contact-orbit km-orbit-b"/><div className="km-contact-card"><div className="km-contact-mark">I›</div><h2>Work <b>With Us</b></h2><p>Book an intro call. I take on a few new<br/> creators at a time.</p><div><a className="km-button km-button-blue" href={calendly} target="_blank" rel="noreferrer">Book a call <Arrow/></a><a className="km-button km-button-outline" href="#case-studies">View case studies <Arrow/></a></div></div><div className="km-floating-thumbs">{[minecraftThumbs[1],techThumbs[2],minecraftThumbs[2],techThumbs[1],minecraftThumbs[3],techThumbs[3]].map((img,i)=><img key={i} className={'km-float-thumb km-ft-'+i} src={img} alt="" loading="lazy"/>)}</div></section>
     </main>
-    <footer className="footer section-shell"><a className="brand footer-brand" href="#top"><span className="brand-mark"><i/><i/><i/></span><span>kyro<span className="brand-light">media</span><small>CREATOR EDITING STUDIO</small></span></a><span className="footer-copy">Thoughtful edits. Better stories. © {new Date().getFullYear()} Kyro Media.</span><a className="back-top" href="#top">BACK TO TOP ↑</a></footer>
+    <footer className="km-footer"><div className="km-footer-main"><div className="km-footer-brand"><Brand/><p>Remote editing for YouTube<br/>creators.</p><div className="km-socials"><a href="https://x.com/" target="_blank" rel="noreferrer" aria-label="X">𝕏</a><a href="https://instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">◎</a></div></div><div><b>Work</b><a href="#tech">Tech</a><a href="#minecraft">Minecraft</a></div><div><b>Company</b><a href="#case-studies">Case studies</a><a href="#contact">Contact</a></div><div><b>Get in touch</b><a href={calendly} target="_blank" rel="noreferrer">Book a call</a><a href="mailto:sonik@kyromedia.in">sonik@kyromedia.in</a></div></div><div className="km-footer-bottom"><span>© 2026 Kyro Media</span><span>Made for creators who care about the cut.</span></div></footer>
   </div>;
 }
