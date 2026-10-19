@@ -15,7 +15,7 @@ function textureFor(kind: 'screen' | 'clips' | 'wave' | 'grade') {
     x.fillStyle = '#1b2d47'; x.fillRect(735, 60, 240, 360);
     for (let i = 0; i < 5; i++) { x.fillStyle = ['#3188ff','#54b7eb','#9279f3','#39b9a8','#efb66f'][i]; x.fillRect(755, 100+i*55, 125+(i%2)*65, 12); x.fillStyle='#536b8b'; x.fillRect(755, 119+i*55, 190, 4); }
     x.fillStyle='#0a1425'; x.fillRect(25,440,950,155);
-    for(let row=0;row<3;row++){for(let i=0;i<7;i++){x.fillStyle=[['#3289ff','#9279f3','#35b9a7'][row]];x.fillRect(35+i*133,465+row*39,110+(i%2)*12,28);}}
+    for(let row=0;row<3;row++){for(let i=0;i<7;i++){x.fillStyle=['#3289ff','#9279f3','#35b9a7'][row];x.fillRect(35+i*133,465+row*39,110+(i%2)*12,28);}}
     x.strokeStyle='#fff';x.lineWidth=3;x.beginPath();x.moveTo(430,450);x.lineTo(430,595);x.stroke();
   } else if (kind === 'clips') {
     ['#7bb6e9','#1e4b7b','#e6b884','#4184b5','#8ac9ba','#4776b6'].forEach((v,i)=>{x.fillStyle=v;x.fillRect(30+(i%3)*315,75+Math.floor(i/3)*160,285,135);});
