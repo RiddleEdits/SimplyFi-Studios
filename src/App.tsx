@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import HeroWorkspace from './HeroWorkspace';
 import './kyro-reference.css';
 
 const calendly = 'https://calendly.com/rgsfirdaus/30min';
@@ -77,7 +78,7 @@ export default function App() {
     <main>
       <section className="km-hero">
         <div className="km-hero-copy"><h1>Editor Behind<br/><span>Tech and Minecraft</span><br/>Channels</h1><p>Editing built around your channel, your audience, and the moments that make people keep watching.</p><div className="km-hero-actions"><a className="km-button km-button-blue" href={calendly} target="_blank" rel="noreferrer">Book a call <Arrow/></a><a className="km-button km-button-white" href="#work">See the work <Arrow/></a></div></div>
-        <div className="km-hero-art" aria-label="Video editing workstation illustration"><div className="km-hero-halo"/><div className="km-film km-film-a"><img src={techThumbs[0]} alt=""/><img src={minecraftThumbs[1]} alt=""/><img src={techThumbs[2]} alt=""/></div><div className="km-film km-film-b"><img src={minecraftThumbs[0]} alt=""/><img src={minecraftThumbs[2]} alt=""/><img src={techThumbs[3]} alt=""/></div><div className="km-hero-laptop"><div className="km-laptop-screen"><div className="km-screen-bar"><i/><i/><i/><span>KYRO MEDIA · EDIT SUITE</span></div><img src={techThumbs[0]} alt="Video editing preview"/><div className="km-laptop-timeline"><i/><i/><i/><i/><i/><i/></div></div><div className="km-laptop-base"/></div><div className="km-app-icon km-pr">Pr</div><div className="km-app-icon km-ae">Ae</div><div className="km-sound-chip">▥ <span>Audio waveform</span></div><div className="km-play-chip">▶</div></div>
+        <HeroWorkspace />
       </section>
       <section className="km-work-section" id="work"><WorkSection/><WorkSection minecraft/></section>
       <section className="km-stats"><div className="km-stats-backdrop">{[...techThumbs,...minecraftThumbs,...minecraftThumbs].map((img,i)=><img key={i} src={img} alt="" loading="lazy"/>)}</div><div className="km-stats-panel"><div><strong>250M<span>+</span></strong><p>Views on the videos<br/>edited by Kyro</p></div><div><strong>50<span>+</span></strong><p>Creators worked with<br/>in tech and Minecraft</p></div><div><strong>8<span>×</span></strong><p>Average views on clients<br/>after switching to Kyro</p></div></div></section>
