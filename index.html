@@ -1,57 +1,49 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="__variable_36193a __variable_d0aca7">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
       (function() {
         try {
-          var _native = window.fetch;
-          var _defaultFetch = _native ? function() {
-            return _native.apply(window, arguments);
-          } : null;
-          var _custom = null;
-          var desc = {
-            get: function() {
-              return _custom || _defaultFetch;
-            },
-            set: function(fn) {
-              _custom = fn;
-            },
-            configurable: true,
-            enumerable: true
-          };
+          var realFetch = window.fetch;
           try {
-            Object.defineProperty(window, 'fetch', desc);
+            Object.defineProperty(window, 'fetch', {
+              get: function() { return realFetch; },
+              set: function(fn) { realFetch = fn; },
+              configurable: true,
+              enumerable: true
+            });
           } catch (e1) {}
-          if (typeof Window !== 'undefined' && Window.prototype) {
-            try {
-              Object.defineProperty(Window.prototype, 'fetch', desc);
-            } catch (e2) {}
-          }
-          window.addEventListener('error', function(event) {
-            if (event && event.message && event.message.indexOf('fetch') !== -1 && event.message.indexOf('only a getter') !== -1) {
-              event.preventDefault();
-              event.stopPropagation();
+          try {
+            if (window.Window && window.Window.prototype) {
+              Object.defineProperty(window.Window.prototype, 'fetch', {
+                get: function() { return realFetch; },
+                set: function(fn) { realFetch = fn; },
+                configurable: true,
+                enumerable: true
+              });
             }
-          }, true);
+          } catch (e2) {}
         } catch (e) {}
       })();
     </script>
-    <title>RiddleEdits — Video Editor</title>
-    <meta name="description" content="RiddleEdits — Professional video editor portfolio for creators who want to stand out." />
-    <link rel="icon" type="image/png" href="/riddle-avatar.png" />
-    <meta property="og:title" content="RiddleEdits — Video Editor" />
-    <meta property="og:description" content="RiddleEdits — Professional video editor portfolio for creators who want to stand out." />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kyro Media · The editing team behind tech and Minecraft channels</title>
+    <meta name="description" content="The editing team behind tech and Minecraft channels. Tech reviews, 100 Days series and shorts. You record, we make it work." />
+    <meta property="og:title" content="Kyro Media · The editing team behind tech and Minecraft channels" />
+    <meta property="og:description" content="The editing team behind tech and Minecraft channels. Tech reviews, 100 Days series and shorts. You record, we make it work." />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kyro Media" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <meta name="twitter:title" content="Kyro Media · The editing team behind tech and Minecraft channels" />
+    <meta name="twitter:description" content="The editing team behind tech and Minecraft channels. Tech reviews, 100 Days series and shorts. You record, we make it work." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23010405'/><path d='M30 25 L45 50 L30 75 L45 75 L60 50 L45 25 Z' fill='%2338bdf8'/><path d='M55 25 L70 50 L55 75 L70 75 L85 50 L70 25 Z' fill='%230284c7'/></svg>" />
   </head>
-  <body>
+  <body class="bg-[#010405] text-[#0d1217] antialiased">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

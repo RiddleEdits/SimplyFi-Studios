@@ -1,7 +1,6 @@
 {
-  "name": "RiddleEdits — Video Editor",
-  "description": "RiddleEdits — Professional video editor portfolio for creators who want to stand out.",
+  "name": "Kyro Media",
+  "description": "The editing team behind tech and Minecraft channels. Tech reviews, 100 Days series and shorts. You record, we make it work.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
-
