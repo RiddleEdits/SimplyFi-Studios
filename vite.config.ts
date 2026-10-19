@@ -5,6 +5,8 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
+    // GitHub Pages serves this project under /SimplyFi-Studios/.
+    base: '/SimplyFi-Studios/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
